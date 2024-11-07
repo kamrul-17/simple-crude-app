@@ -1,21 +1,36 @@
 // simple crude operation with node, express and mongoes
 const express = require('express');
 const mongoose = require('mongoose');
-const Product = require('./models/productModel');
+const routerProduct = require('./routes/productRoute');
 const app = express();
 //Middleware for JSON and links 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //Routes for API
-app.use("/api/products, productsRoute")
+app.use("/api/products", routerProduct);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000!');
-});
+// app.listen(3000, () => {
+//     console.log('Server running on port 3000!');
+// });
+
+
+// Run the server
+const startServer = async () => {
+  try {
+    // Start the server
+    app.listen(3001, () => {
+      console.log("Server listening on port: 3001");
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+startServer();
 
 //connect to mongodb server
 
